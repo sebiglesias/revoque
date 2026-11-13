@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Revoque | Materiales por m² (Grueso, Fino e Hidrófugo)</title>
+    <meta name="description" content="Calculadora de materiales para revoque grueso, fino y azotado hidrófugo por m2. Calculá bolsas de cemento, cal, arena y ceresita con lista para el corralón por WhatsApp.">
+    <meta name="keywords" content="calculadora de revoque, cuanto material para revoque m2, calculadora revoque grueso y fino, bolsas de cemento por m2 de revoque, ceresita hidrofugo">
+    <link rel="canonical" href="https://sebiglesias.com.ar/revoque/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Revoque | Cemento, Cal y Arena por m²">
+    <meta property="og:description" content="Calculá exacto cuánto cemento, cal hidratada, arena y Ceresita necesitás para revocar tus paredes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sebiglesias.com.ar/revoque/">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BNDBQP0W7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2BNDBQP0W7');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3381238987477190" crossorigin="anonymous"></script>
+
+    <!-- Schema.org WebApplication & FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "Calculadora de Revoque",
+          "url": "https://sebiglesias.com.ar/revoque/",
+          "applicationCategory": "UtilityApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": "Calculadora de materiales para revoque grueso, revoque fino y azotado hidrófugo por m2 de pared."
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuánto material se necesita para 1 m² de revoque grueso?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Para 1 m² de revoque grueso de 1.5 cm de espesor se calculan aprox. 4 kg de cemento, 6 kg de cal hidratada y 0.02 m³ de arena mediana (o 6 kg de cemento de albañilería tipo Plasticor + arena)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuál es la proporción del azotado hidrófugo para humedad?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La mezcla hidrófuga se hace en proporción 1:3 (1 parte de cemento por 3 partes de arena mediana o gruesa lavada) empastada con agua que contiene aditivo hidrófugo (como Ceresita o Sika 1) en proporción 1:10."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-zinc-100 text-zinc-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-zinc-200 sticky top-0 z-20">
+        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🧱</span>
+                <div>
+                    <h1 class="text-lg font-bold text-zinc-900 leading-tight">Calculadora de Revoque</h1>
+                    <p class="text-xs text-zinc-500">Materiales de corralón por m² (Grueso, Fino e Hidrófugo)</p>
+                </div>
+            </div>
+            <a href="https://sebiglesias.com.ar" class="text-xs font-medium text-amber-700 hover:text-amber-800 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+                ← Más microapps
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 py-6 w-full flex-grow space-y-6">
+
+        <!-- Calculator Card (Above The Fold) -->
+        <section class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-5 md:p-6 space-y-5">
+            
+            <!-- Superficie de pared -->
+            <div>
+                <div class="flex justify-between items-center mb-1">
+                    <label class="text-sm font-semibold text-zinc-900">Superficie de pared a revocar:</label>
+                    <span class="text-xl font-bold text-amber-700 bg-amber-50 px-3 py-0.5 rounded-lg border border-amber-200" id="lbl-m2">25 m²</span>
+                </div>
+                <div class="grid grid-cols-2 gap-3 mt-2">
+                    <div>
+                        <label class="block text-xs text-zinc-500 mb-1">Largo / Ancho (metros)</label>
+                        <input type="number" id="inp-largo" value="5.0" step="0.5" min="0.5" oninput="calcFromDims()" class="w-full p-2 border border-zinc-300 rounded-lg text-sm font-bold text-zinc-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-zinc-500 mb-1">Alto (metros)</label>
+                        <input type="number" id="inp-alto" value="2.6" step="0.1" min="0.5" oninput="calcFromDims()" class="w-full p-2 border border-zinc-300 rounded-lg text-sm font-bold text-zinc-800">
+                    </div>
+                </div>
+                <div class="text-xs text-zinc-500 mt-2 flex items-center justify-between">
+                    <span>O ingresá m² directos:</span>
+                    <input type="number" id="inp-m2-direct" value="25" min="1" oninput="calcFromDirect(this.value)" class="w-24 p-1 border border-zinc-300 rounded text-center text-xs font-bold text-zinc-800">
+                </div>
+            </div>
+
+            <!-- Tipo de trabajo de revoque -->
+            <div>
+                <label class="block text-sm font-semibold text-zinc-900 mb-2">Tipo de capa de revoque:</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    <button type="button" onclick="setRevoque('completo')" id="btn-completo" class="rev-btn p-3 rounded-xl border-2 text-left transition border-amber-600 bg-amber-50/50">
+                        <div class="font-bold text-sm text-zinc-900">🏠 Revoque Completo</div>
+                        <div class="text-xs text-zinc-500 mt-0.5">Hidrófugo + Grueso (1.5cm) + Fino</div>
+                    </button>
+                    <button type="button" onclick="setRevoque('grueso')" id="btn-grueso" class="rev-btn p-3 rounded-xl border border-zinc-200 text-left transition hover:border-zinc-300">
+                        <div class="font-bold text-sm text-zinc-900">🧱 Solo Grueso (Jaharro)</div>
+                        <div class="text-xs text-zinc-500 mt-0.5">Nivelación 1.5 a 2 cm</div>
+                    </button>
+                    <button type="button" onclick="setRevoque('fino')" id="btn-fino" class="rev-btn p-3 rounded-xl border border-zinc-200 text-left transition hover:border-zinc-300">
+                        <div class="font-bold text-sm text-zinc-900">🎨 Solo Fino (Enlucido)</div>
+                        <div class="text-xs text-zinc-500 mt-0.5">Terminación lista para pintar (3mm)</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Opciones extra -->
+            <div class="flex items-center justify-between pt-2 border-t border-zinc-100 text-xs font-medium text-zinc-700">
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="chk-desperdicio" checked onchange="calc()" class="w-4 h-4 text-amber-600 rounded border-zinc-300 focus:ring-amber-500">
+                    <span>Incluir 10% de desperdicio reglamentario</span>
+                </label>
+                <span class="text-zinc-500">Cálculo según CIRSOC</span>
+            </div>
+
+            <!-- Resultados -->
+            <div class="bg-gradient-to-br from-zinc-800 to-stone-900 rounded-xl p-5 text-white shadow-sm space-y-4">
+                <div class="flex items-center justify-between border-b border-zinc-700/60 pb-3">
+                    <span class="text-xs uppercase tracking-wider font-semibold text-amber-300">Materiales para el Corralón</span>
+                    <span class="text-xs font-bold bg-white/20 px-2.5 py-0.5 rounded-full" id="txt-res-m2">25 m² de pared</span>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-amber-300" id="res-cemento">3 bolsas</div>
+                        <div class="text-xs text-zinc-300 mt-1">Cemento (50 kg)</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-amber-300" id="res-cal">7 bolsas</div>
+                        <div class="text-xs text-zinc-300 mt-1">Cal hidratada (25 kg)</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-amber-300" id="res-arena">0.6 m³</div>
+                        <div class="text-xs text-zinc-300 mt-1">Arena (m³ o bolsones)</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-amber-300" id="res-hidrofugo">5 kg</div>
+                        <div class="text-xs text-zinc-300 mt-1">Ceresita / Hidrófugo</div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-zinc-300 bg-white/5 rounded-lg p-3 border border-white/10">
+                    💡 <strong>Alternativa con cemento de albañilería (Plasticor / Hidralit):</strong> En lugar de cemento + cal para el grueso, podés pedir <span class="text-amber-300 font-bold" id="res-plasticor">4 bolsas de Plasticor</span> + arena.
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="pt-2 flex flex-col sm:flex-row gap-2">
+                    <button onclick="shareWhatsApp()" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-semibold rounded-lg text-sm flex items-center justify-center gap-2 transition shadow-sm">
+                        <span>📲</span> Pedir presupuesto al corralón por WhatsApp
+                    </button>
+                    <button onclick="copyList()" id="btn-copy" class="w-full sm:w-auto py-2.5 px-4 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg text-sm transition">
+                        Copiar lista
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Anuncio AdSense Reservado -->
+        <div class="w-full min-h-[100px] flex items-center justify-center bg-zinc-200/60 border border-dashed border-zinc-300 rounded-xl text-zinc-400 text-xs">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3381238987477190"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- Guía de Dosificaciones (SEO & E-E-A-T) -->
+        <section class="bg-white rounded-2xl border border-zinc-200 p-6 space-y-4 text-zinc-700 text-sm">
+            <h2 class="text-lg font-bold text-zinc-900">Dosificaciones típicas de revoque en Argentina</h2>
+
+            <div class="space-y-3">
+                <div class="border-b border-zinc-100 pb-2">
+                    <h3 class="font-semibold text-zinc-900">1. Azotado Hidrófugo (Barrera contra humedad)</h3>
+                    <p class="text-xs text-zinc-600 mt-1">
+                        <strong>Proporción 1:3</strong> → 1 balde de cemento común por 3 baldes de arena lavada. Se empasta con agua mezclada con Ceresita en proporción 1:10 (1 litro de hidrófugo cada 10 litros de agua). Se aplica en capas de 5 mm y nunca debe dejarse secar al sol sin tapar con el grueso.
+                    </p>
+                </div>
+                <div class="border-b border-zinc-100 pb-2">
+                    <h3 class="font-semibold text-zinc-900">2. Revoque Grueso (Jaharro)</h3>
+                    <p class="text-xs text-zinc-600 mt-1">
+                        <strong>Proporción 1:1/4:3</strong> → 1 parte de cal aérea/hidratada, 1/4 parte de cemento y 3 partes de arena mediana. O directamente cemento de albañilería (Plasticor) 1:3 con arena. Espesor estándar: 1.5 cm.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-zinc-900">3. Revoque Fino (Enlucido)</h3>
+                    <p class="text-xs text-zinc-600 mt-1">
+                        <strong>Proporción 1:1/8:3</strong> → 1 parte de cal aérea hidratada tamizada, 1/8 parte de cemento y 3 partes de arena fina pasada por zaranda milimétrica (o mezcla fina a la cal en bolsa lista para usar).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-zinc-200 py-6 text-center text-xs text-zinc-500">
+        <p>Herramienta gratuita para albañiles y constructores por <a href="https://sebiglesias.com.ar" class="text-zinc-800 font-semibold hover:underline">Sebastián Iglesias</a> · Sin registro.</p>
+    </footer>
+
+    <!-- Script de cálculo -->
+    <script>
+        let currentRevoque = 'completo'; // 'completo', 'grueso', 'fino'
+        let m2Total = 25;
+
+        function calcFromDims() {
+            const largo = parseFloat(document.getElementById('inp-largo').value) || 0;
+            const alto = parseFloat(document.getElementById('inp-alto').value) || 0;
+            m2Total = Math.max(1, Math.round(largo * alto * 10) / 10);
+            document.getElementById('inp-m2-direct').value = m2Total;
+            calc();
+        }
+
+        function calcFromDirect(val) {
+            m2Total = Math.max(1, parseFloat(val) || 1);
+            calc();
+        }
+
+        function setRevoque(tipo) {
+            currentRevoque = tipo;
+            ['completo', 'grueso', 'fino'].forEach(k => {
+                const btn = document.getElementById('btn-' + k);
+                if (k === tipo) {
+                    btn.className = "rev-btn p-3 rounded-xl border-2 text-left transition border-amber-600 bg-amber-50/50";
+                } else {
+                    btn.className = "rev-btn p-3 rounded-xl border border-zinc-200 text-left transition hover:border-zinc-300";
+                }
+            });
+            calc();
+        }
+
+        function calc() {
+            const disp = document.getElementById('chk-desperdicio').checked ? 1.10 : 1.0;
+            document.getElementById('lbl-m2').textContent = `${m2Total} m²`;
+            document.getElementById('txt-res-m2').textContent = `${m2Total} m² de superficie`;
+
+            let cementoKg = 0;
+            let calKg = 0;
+            let arenaM3 = 0;
+            let hidrofugoKg = 0;
+            let plasticorKg = 0;
+
+            if (currentRevoque === 'completo') {
+                // Hidrofugo (5mm): 4 kg cemento + 0.008 m3 arena + 0.4 kg ceresita por m2
+                // Grueso (15mm): 4.5 kg cemento + 6.5 kg cal + 0.018 m3 arena por m2
+                // Fino (3mm): 0.5 kg cemento + 3.0 kg cal + 0.004 m3 arena por m2
+                cementoKg = m2Total * (4.0 + 4.5 + 0.5) * disp;
+                calKg = m2Total * (6.5 + 3.0) * disp;
+                arenaM3 = m2Total * (0.008 + 0.018 + 0.004) * disp;
+                hidrofugoKg = m2Total * 0.4 * disp;
+                plasticorKg = m2Total * 8.5 * disp;
+            } else if (currentRevoque === 'grueso') {
+                cementoKg = m2Total * 4.5 * disp;
+                calKg = m2Total * 6.5 * disp;
+                arenaM3 = m2Total * 0.018 * disp;
+                hidrofugoKg = 0;
+                plasticorKg = m2Total * 8.5 * disp;
+            } else if (currentRevoque === 'fino') {
+                cementoKg = m2Total * 0.5 * disp;
+                calKg = m2Total * 3.5 * disp;
+                arenaM3 = m2Total * 0.005 * disp;
+                hidrofugoKg = 0;
+                plasticorKg = 0;
+            }
+
+            const bolsasCemento = Math.ceil(cementoKg / 50);
+            const bolsasCal = Math.ceil(calKg / 25);
+            const m3ArenaRedondo = Math.max(0.5, Math.ceil(arenaM3 * 2) / 2).toFixed(1);
+            const ceresitaBaldes = Math.ceil(hidrofugoKg / 4) * 4; // baldes de 4kg o 20kg
+            const bolsasPlasticor = Math.ceil(plasticorKg / 40);
+
+            document.getElementById('res-cemento').textContent = `${bolsasCemento} ${bolsasCemento === 1 ? 'bolsa' : 'bolsas'}`;
+            document.getElementById('res-cal').textContent = `${bolsasCal} ${bolsasCal === 1 ? 'bolsa' : 'bolsas'}`;
+            document.getElementById('res-arena').textContent = `${m3ArenaRedondo} m³`;
+            document.getElementById('res-hidrofugo').textContent = hidrofugoKg > 0 ? `${ceresitaBaldes} kg` : 'No aplica';
+            document.getElementById('res-plasticor').textContent = `${bolsasPlasticor} bolsas de 40kg`;
+        }
+
+        function getShareText() {
+            const cemento = document.getElementById('res-cemento').textContent;
+            const cal = document.getElementById('res-cal').textContent;
+            const arena = document.getElementById('res-arena').textContent;
+            const hidrofugo = document.getElementById('res-hidrofugo').textContent;
+
+            return `🧱 *PEDIDO DE MATERIALES PARA REVOQUE* (${m2Total} m²)\n\n` +
+                   `• Cemento común: ${cemento} (50 kg)\n` +
+                   `• Cal hidratada: ${cal} (25 kg)\n` +
+                   `• Arena: ${arena}\n` +
+                   `• Ceresita / Hidrófugo: ${hidrofugo}\n` +
+                   `• Trabajo: Revoque ${currentRevoque}\n\n` +
+                   `Calculado gratis en: https://sebiglesias.com.ar/revoque/`;
+        }
+
+        function shareWhatsApp() {
+            const text = encodeURIComponent(getShareText());
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        }
+
+        function copyList() {
+            navigator.clipboard.writeText(getShareText()).then(() => {
+                const btn = document.getElementById('btn-copy');
+                const old = btn.textContent;
+                btn.textContent = '¡Copiado! ✓';
+                setTimeout(() => btn.textContent = old, 2000);
+            });
+        }
+
+        // Init
+        calcFromDims();
+    </script>
+</body>
+</html>
